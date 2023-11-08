@@ -27,10 +27,14 @@ exports.logIn = async (req,res) => {
             email: email,
         })
         if(!user){
-            return res.status(200).send('logIn failed');
+            return res.status(200).send({
+                msg: 'logIn failed'
+            });
         } 
         const match = await bcrypt.compare(password, user.password);
-        if(!match) return res.status(200).send('login failed');
+        if(!match) return res.status(200).send({
+            msg:'logIn failed'
+        });
         var token =jwt.sign({ email : email, password : user.password}, JWTKEY);
         return res.status(200).send({
             msg :'logIn success',
