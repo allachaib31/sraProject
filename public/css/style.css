@@ -1,0 +1,6 @@
+form button[type=submit]{
+    background-color: #f00 !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+}

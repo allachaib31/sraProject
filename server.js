@@ -14,6 +14,7 @@ mongoose.connect(MONGODBURL,{
 })
 const app = express();
 app.use(express.static('views'))
+    .use(express.static('public'))
     .use(express.json())
     .use(morgan('tiny'))
     .use('/authentication/',authentication)
