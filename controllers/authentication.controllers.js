@@ -22,10 +22,13 @@ exports.signUp = async (req, res) => {
 exports.logIn = async (req,res) => {
     const { email , password } = req.body;
     try{
-        const user = userModel.findOne({
-            email : email ,
+        console.log('jkbv');
+        const user = await userModel.findOne({
+            email: email,
         })
-        if(!user) return res.status(200).send('logIn failed');
+        if(!user){
+            return res.status(200).send('logIn failed');
+        } 
         const match = await bcrypt.compare(password, user.password);
         if(!match) return res.status(200).send('login failed');
         var token =jwt.sign({ email : email, password : user.password}, JWTKEY);
