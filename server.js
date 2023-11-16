@@ -1,7 +1,10 @@
 require('custom-env').env('dev');
 const express = require('express');
 const mongoose = require('mongoose');
+const multer =require('multer');
+const creatchannel = require('./routers/creatchannel.routers')
 const authentication = require('./routers/authentication.routers');
+const uploadVideo = require('./routers/uploadVideo.routers');
 const morgan = require('morgan');
 const MONGODBURL = process.env.MONGODBURL;
 mongoose.connect(MONGODBURL,{
@@ -18,6 +21,8 @@ app.use(express.static('views'))
     .use(express.json())
     .use(morgan('tiny'))
     .use('/authentication/',authentication)
+    .use('/upload/',uploadVideo)
+    .use('/channel/',creatchannel)
 app.get('/',(req,res)=>{
     return res.status(200).sendFile(__dirname + '/index.html')
 })
