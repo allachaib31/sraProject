@@ -89,7 +89,6 @@ try{
         user.sendRequest()
     })
 }catch(err){
-    console.log(err)
 }
 
 
@@ -103,6 +102,23 @@ try{
         const user = new SignUp(username,email,password);
         user.sendRequest();
     });
+}catch(err){
+
+}
+
+const profile = document.getElementById("profile");
+const logout = document.getElementById("logout");
+
+try{
+    profile.addEventListener("click", ()=>{
+        const dropDown = document.getElementById("dropDown");
+        if(dropDown.style.display == "none") return dropDown.style.display = "block";
+        dropDown.style.display = "none"
+    })
+    logout.addEventListener("click",()=>{
+        window.localStorage.clear();
+        window.location.href = "/authentification/signin.html"
+    })
 }catch(err){
 
 }
