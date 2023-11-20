@@ -1,7 +1,8 @@
-if(window.localStorage.getItem("token")){
+/*if(window.localStorage.getItem("token")){
     window.location.href = "/index.html";
 }
-
+*/
+//alert(window.location.pathname == "/index.html")
 class Authentication {
     #username;
     #email;
@@ -121,4 +122,41 @@ try{
     })
 }catch(err){
 
+}
+
+
+const submitChannel = document.getElementById("submitChannel");
+
+try{
+    submitChannel.addEventListener("click",()=>{
+        const title = document.getElementById("titleChannel").value;
+        const description = document.getElementById("descriptionChannel").value;
+        const imageCover = document.getElementById("uploadCoverImage");
+        const imageProfile = document.getElementById("uploadimageProfile");
+        console.log(imageCover.files)
+        const form = new FormData();
+        form.append("Name",title);
+        form.append("Description",description);
+        form.append("token",window.localStorage.getItem("token"));
+        form.append("imageProfile",imageProfile.files[0]);
+        form.append("imageCover",imageCover.files[0]);
+        axios.post("/channel/creatchannel",form).then((res)=>{
+            console.log(res.data)
+            if(res.data == "channel created seccessfully"){
+                alert("your channel is created");
+                window.location.reload();
+            }else{
+                alert("try again Error")
+            }
+        }).catch(()=>{
+            
+        })
+        //alert(title + description)
+    })
+}catch(err){
+
+}
+
+if(window.location.pathname == "/channel/channel.html"){
+    axios
 }

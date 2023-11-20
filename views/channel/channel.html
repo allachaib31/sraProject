@@ -12,19 +12,14 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Document</title>
   </head>
   <body class="bg-dark">
     <header class="container">
       <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex justify-content-center align-items-center gap-3">
-          <img
-            src="../../public/images/youtube.png"
-            width="100"
-            height="100"
-            alt=""
-          />
+          <img src="/images/youtube.png" width="100" height="100" alt="" />
           <h1 class="text-white">
             <span style="color: #f00">Nihal</span>
             <span style="color: white">Tube</span>
@@ -32,7 +27,7 @@
         </div>
         <div class="text-white profile">
           <img
-            src="../../public/images/nihal.jpg"
+            src="/images/nihal.jpg"
             width="75"
             height="75"
             alt=""
@@ -86,11 +81,11 @@
     </div>
 
     <div class="imageCouver d-none">
-      <img src="../../public/images/couver.jpg" alt="" />
+      <img src="/images/couver.jpg" alt="" />
     </div>
     <div class="channelInfo container mt-3 d-none">
       <div class="d-flex align-items-center gap-2">
-        <img src="../../public/images/nihal.jpg" alt="" />
+        <img src="/images/nihal.jpg" alt="" />
         <div>
           <h1 class="text-white">Nihal & Alaa</h1>
           <ul class="list-style-none d-flex gap-4" style="color: #aaa">
@@ -110,22 +105,27 @@
     </div>
     <hr style="color: #aaa" />
     <div class="d-flex justify-content-center align-items-center">
-      <button class="btn" data-bs-toggle="" style="color: #f00; border: 1px solid #f00">
+      <button
+        class="btn"
+        data-bs-toggle="modal"
+        data-bs-target="#createChannel"
+        style="color: #f00; border: 1px solid #f00"
+      >
         Create Channel
       </button>
     </div>
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="createChannel"
       tabindex="-1"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="createChannel"
       aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Create Channel</h5>
             <button
               type="button"
               class="btn-close"
@@ -133,7 +133,49 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="titleChannel"
+                  aria-describedby="titleHelp"
+                  placeholder="Enter your title"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="descriptionChannel"
+                  placeholder="Enter your description"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="imageCover" class="form-label">image Cover</label>
+                <input
+                  type="file"
+                  name="imageCover"
+                  accept="image/*"
+                  class="form-control"
+                  id="uploadCoverImage"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="imageProfile" class="form-label">image Profile</label>
+                <input
+                  type="file"
+                  name="imageProfile"
+                  accept="image/*"
+                  class="form-control"
+                  id="uploadimageProfile"
+                />
+              </div>
+            </form>
+          </div>
           <div class="modal-footer">
             <button
               type="button"
@@ -142,7 +184,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" id="submitChannel" class="btn btn-primary">Create Channel</button>
           </div>
         </div>
       </div>
@@ -213,7 +255,8 @@
         </div>
       </div>
     </div>
-    <script src="../../public/js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/index.js"></script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
