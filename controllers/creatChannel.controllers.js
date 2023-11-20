@@ -1,5 +1,5 @@
 const channleModel = require('../models/channel');
-
+const videoModel = require('../models/video');
 exports.creatchannel = async(req,res)=>{
     try {
         const { Name, Description,idUser } = req.body;
@@ -19,6 +19,30 @@ exports.creatchannel = async(req,res)=>{
     }catch(err){
       console.log(err);
         return res.status(200).send("failed to creat channel");
+    }
+}
+exports.getchanneluser =async(req,res)=>{
+
+    try {
+      console.log(req.body.idUser)
+      const channel = await channleModel.findOne({
+        idUser : req.body.idUser,
+      })
+      if(!channel){
+        return res.status(200).send({
+          msg :'channel not found'
+        })
+      }
+      const videos = await videoModel.find({
+        idChanel : channel._id,
+      })
+      return res.status(200).send({
+        msg : 'channel is found',
+        channel : channel,
+        videos : videos
+      })
+    }catch(err){
+      console.log('err')
     }
 }
 

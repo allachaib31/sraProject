@@ -19,6 +19,9 @@ const videoSchema = new mongoose.Schema({
     idChanel :{
         type : mongoose.Schema.Types.ObjectId,
         ref :"channels"
+    },
+    date : {
+        type : Date,
     }
 })
 const videoModel = mongoose.model('videos',videoSchema);

@@ -14,6 +14,7 @@ exports.uploadvideo = async(req,res)=>{
             Descreption: req.body.Descreption,
             video : 'uploads/videos/'+req.file.filename,
             idChanel: channel._id,
+            date : new Date(),
         })
         await video.save();
         return res.status(200).send('video saved')
