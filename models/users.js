@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
+    subscribes : {
+        type : Array
+    }
 })
 const userModel = mongoose.model('users',userSchema);
 module.exports = userModel;

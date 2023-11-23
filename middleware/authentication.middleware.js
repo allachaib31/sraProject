@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/users');
-const channleModel = require('../models/channel');
-const videoModel = require('../models/video');
 const JWTKEY = process.env.JWTKEY;
 exports.authenticationMiddleware = async (req, res, next) => {
     console.log(req.body.token);

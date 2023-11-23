@@ -2,12 +2,15 @@ require('custom-env').env('dev');
 const express = require('express');
 const mongoose = require('mongoose');
 const multer =require('multer');
+const search = require('./routers/search.routers')
 const creatchannel = require('./routers/creatchannel.routers')
 const authentication = require('./routers/authentication.routers');
 const uploadVideo = require('./routers/uploadVideo.routers');
 const showVideos = require('./routers/showviedos.routers');
 const showChannelVideos = require('./routers/showChannelVideos.routers');
+const abonne = require('./routers/abonne.routers')
 const morgan = require('morgan');
+const random = require('./routers/showvidbuid&random.routers')
 const MONGODBURL = process.env.MONGODBURL;
 mongoose.connect(MONGODBURL,{
     useNewUrlParser: true,
@@ -27,6 +30,9 @@ app.use(express.static('views'))
     .use('/channel/',creatchannel)
     .use('/showVideos/',showVideos)
     .use('/showChannelVideos/',showChannelVideos)
+    .use('/search/',search)
+    .use('/abonne/',abonne)
+    .use('/random/',random)
 app.get('/',(req,res)=>{
     return res.status(200).sendFile(__dirname + '/index.html')
 })
