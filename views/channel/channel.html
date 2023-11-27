@@ -79,21 +79,22 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
-
-    <div class="imageCouver d-none">
-      <img src="/images/couver.jpg" alt="" />
+    <div style="background-color: black">
+      <div id="imgCover" class="container imageCouver d-none">
+        <img id="changeImageCover" src="/images/couver.jpg" alt="" />
+      </div>
     </div>
-    <div class="channelInfo container mt-3 d-none">
+    <div id="channelInfo" class="channelInfo container mt-3 d-none">
       <div class="d-flex align-items-center gap-2">
-        <img src="/images/nihal.jpg" alt="" />
+        <img id="changeImageProfile" src="/images/nihal.jpg" alt="" />
         <div>
-          <h1 class="text-white">Nihal & Alaa</h1>
+          <h1 id="nameChannel" class="text-white">Nihal & Alaa</h1>
           <ul class="list-style-none d-flex gap-4" style="color: #aaa">
-            <li>@ala&nihal</li>
-            <li>16.k subscribers</li>
-            <li>100 video</li>
+            <li id="userChannel">@ala&nihal</li>
+            <li><span id="subscribeNumber">16k</span> subscribers</li>
+            <li><span id="videoNumber"></span> video</li>
           </ul>
-          <p style="color: #aaa">
+          <p id="description" style="color: #aaa">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
             eos quaerat qui nam illo quos cumque? Sapiente labore quae
             doloremque cupiditate modi inventore quos libero, corrupti mollitia
@@ -104,7 +105,10 @@
       </div>
     </div>
     <hr style="color: #aaa" />
-    <div class="d-flex justify-content-center align-items-center">
+    <div
+      id="createChannel"
+      class="d-flex justify-content-center align-items-center"
+    >
       <button
         class="btn"
         data-bs-toggle="modal"
@@ -165,7 +169,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="imageProfile" class="form-label">image Profile</label>
+                <label for="imageProfile" class="form-label"
+                  >image Profile</label
+                >
                 <input
                   type="file"
                   name="imageProfile"
@@ -184,7 +190,9 @@
             >
               Close
             </button>
-            <button type="button" id="submitChannel" class="btn btn-primary">Create Channel</button>
+            <button type="button" id="submitChannel" class="btn btn-primary">
+              Create Channel
+            </button>
           </div>
         </div>
       </div>
@@ -215,7 +223,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="title"
+                  id="titleVideo"
                   aria-describedby="titleHelp"
                   placeholder="Enter your title"
                 />
@@ -225,7 +233,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="description"
+                  id="descriptionVideo"
                   placeholder="Enter your description"
                 />
               </div>
@@ -235,7 +243,7 @@
                   name="video"
                   accept="video/*"
                   class="form-control"
-                  id="upload"
+                  id="uploadVideoFile"
                 />
               </div>
             </form>
@@ -248,14 +256,27 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-outline-success">
+            <button
+              type="button"
+              id="submitVideo"
+              class="btn btn-outline-success"
+            >
               Upload Video
             </button>
           </div>
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <div id="videos" class="container m-auto row row-cols-1 row-cols-md-3 g-4">
+     
+    </div>
+    <!--<video controls id="getVideo" src=""></video>-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"
+      integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="/js/index.js"></script>
     <!-- Optional JavaScript; choose one of the two! -->
 

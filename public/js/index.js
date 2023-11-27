@@ -158,5 +158,87 @@ try{
 }
 
 if(window.location.pathname == "/channel/channel.html"){
-    axios
+    axios.post('/channel/getchannel',{
+        token: window.localStorage.getItem("token")
+    }).then((res)=>{
+        console.log(res)
+        if(res.data.msg == "channel is found"){
+            const createChannelBtn = document.getElementById("createChannel");
+            const imgCover = document.getElementById("imgCover");
+            const channelInfo = document.getElementById("channelInfo");
+            imgCover.classList.remove("d-none");
+            channelInfo.classList.remove("d-none");
+            createChannelBtn.remove();
+
+            const changeImageCover = document.getElementById("changeImageCover");
+            const changeImageProfile = document.getElementById("changeImageProfile");
+            const userChannel = document.getElementById("userChannel");
+            const nameChannel = document.getElementById("nameChannel");
+            const videoNumber = document.getElementById("videoNumber");
+            const description = document.getElementById("description");
+            const videos = document.getElementById("videos");
+            //document.getElementById("getVideo").src = '/' + res.data.videos[0].video
+            changeImageCover.src = '/' + res.data.channel.photoDeCouvertute;
+            changeImageProfile.src = '/' + res.data.channel.profile;
+            userChannel.innerText = res.data.channel.Name;
+            videoNumber.innerText = res.data.videos.length
+            nameChannel.innerText = res.data.channel.Name;
+            description.innerText = res.data.channel.Descreption;
+            for(let i = 0;i < res.data.videos.length;i++){
+                videos.innerHTML += `
+                <a class="col" href="/videos/video.html?vidId=${res.data.videos[i]._id}" style="text-decoration:none;">
+                <div style="cursor: pointer;" class="card bg-dark">
+                  <video
+                    src="/${res.data.videos[i].video}"
+                    class="card-img-top"
+                    alt="..."
+                    style="width: 398px;height: 223px;"
+                  ></video>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                      <img
+                        src="/${res.data.channel.profile}"
+                        class="rounded-circle"
+                        width="50"
+                        height="50"
+                        alt=""
+                      />
+                      <div>
+                        <h5 style="color: #aaa; font-weight: bold">${res.data.videos[i].title}</h5>
+                        <h6 style="color: #aaa">${res.data.channel.Name}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+                `
+            }
+        }else{
+            alert(false)
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
+}
+
+const submitVideo = document.getElementById("submitVideo");
+
+try {
+    submitVideo.addEventListener("click",()=>{
+        const title = document.getElementById("titleVideo").value;
+        const description = document.getElementById("descriptionVideo").value;
+        const video = document.getElementById("uploadVideoFile");
+
+        const form = new FormData();
+        console.log(video)
+
+        form.append("title",title);
+        form.append("Descreption",description);
+        form.append("token",window.localStorage.getItem("token"));
+        form.append("video",video.files[0])
+
+        axios.post("/upload/uploadVideo/",form)
+    })
+} catch (error) {
+    
 }

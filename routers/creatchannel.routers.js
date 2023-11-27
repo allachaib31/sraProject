@@ -22,6 +22,6 @@ router.post('/creatchannel',upload.fields([
   { name: 'imageCover', maxCount: 1 }
 ]),middleware.authenticationMiddleware,creatchannel.creatchannel
 )
-router.get('/getchannel',middleware.authenticationMiddleware,creatchannel.getchanneluser)
+router.post('/getchannel',middleware.authenticationMiddleware,creatchannel.getchanneluser)
 
 module.exports = router;

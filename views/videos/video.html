@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body class="bg-dark">
+    <header class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-center align-items-center gap-3">
+          <img
+            src="/images/youtube.png"
+            width="100"
+            height="100"
+            alt=""
+          />
+          <h1 class="text-white">
+            <span style="color: #f00">Nihal</span>
+            <span style="color: white">Tube</span>
+          </h1>
+        </div>
+        <div class="text-white profile">
+          <img
+            src="/images/nihal.jpg"
+            width="75"
+            height="75"
+            alt=""
+            id="profile"
+            class="rounded-circle"
+          />
+          <div class="bg-white text-dark" id="dropDown">
+            <ul class="list-group">
+              <li
+                class="list-group-item list-group-item-action"
+                style="cursor: pointer"
+              >
+                Profile
+              </li>
+              <li
+                class="list-group-item list-group-item-action"
+                style="cursor: pointer"
+              >
+                <a href="/channel/channel.html">Channel</a>
+              </li>
+              <li
+              type="button"
+                class="list-group-item list-group-item-action"
+                style="cursor: pointer"
+                data-bs-toggle="modal" data-bs-target="#uploadVideo"
+              >
+                Upload Video
+              </li>
+              <li
+                class="list-group-item list-group-item-action"
+                style="cursor: pointer"
+              >
+                <button class="btn" id="logout">Sign Out</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="uploadVideo"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Upload Video</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Enter your title">
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <input type="text" class="form-control" id="description" placeholder="Enter your description">
+                </div>
+                <div class="mb-3">
+                    <input type="file" name="video" accept="video/*" class="form-control" id="upload">
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-outline-success">Upload Video</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-3 d-flex flex-wrap">
+        <div class="col-md-9">
+            <video class="rounded" controls autoplay src="/uploads/videos/video-1700504818993-735704798"></video>
+            <div>
+                <h1 class="text-white">would you married me</h1>
+                <div class="d-flex align-items-center gap-3">
+                    <img
+                      src="/images/nihal.jpg"
+                      width="50"
+                      height="50"
+                      class="rounded-circle"
+                      alt=""
+                    />
+                    <div>
+                        <h5 class="text-white">
+                            Nihal & ala
+                        </h5>
+                        <span style="color: #aaa;">8.16M subscribers</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-light" style="font-weight: bold;">Subscribe</button>
+                    </div>
+                  </div>
+                  <div style="background-color: #272727;width: 90%;" class="rounded p-3 mt-3 text-white">
+                    <span>55,917,333 views Jan 11,2020</span>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab ea, nostrum ut magnam magni tempore ullam neque corporis, eos et laborum! Esse reprehenderit provident, doloremque temporibus illo possimus blanditiis soluta!</p>
+                  </div>
+                  <div class="commentaires">
+                    <div class="d-flex align-items-center gap-3">
+                        <img
+                          src="/images/nihal.jpg"
+                          width="50"
+                          height="50"
+                          class="rounded-circle"
+                          alt=""
+                        />
+                        <div>
+                            <input style="width: 100vh;display: block;border: none;" class="text-white bg-transparent outline-none" type="text" placeholder="Add a comment...">
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
+        <div>
+            <a class="col" href="/videos/video.html" style="text-decoration:none;">
+                <div style="cursor: pointer;" class="card bg-dark">
+                  <video
+                    src="/uploads/videos/video-1700504818993-735704798"
+                    class="card-img-top rounded"
+                    alt="..."
+                    style="width: 398px;height: 223px;"
+                  ></video>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                      <img
+                        src="/images/nihal.jpg"
+                        class="rounded-circle"
+                        width="50"
+                        height="50"
+                        alt=""
+                      />
+                      <div>
+                        <h5 style="color: #aaa; font-weight: bold">would you married me</h5>
+                        <h6 style="color: #aaa">Nihal & ala</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a class="col" href="/videos/video.html" style="text-decoration:none;">
+                <div style="cursor: pointer;" class="card bg-dark">
+                  <video
+                    src="/uploads/videos/video-1700504818993-735704798"
+                    class="card-img-top rounded"
+                    alt="..."
+                    style="width: 398px;height: 223px;"
+                  ></video>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                      <img
+                        src="/images/nihal.jpg"
+                        class="rounded-circle"
+                        width="50"
+                        height="50"
+                        alt=""
+                      />
+                      <div>
+                        <h5 style="color: #aaa; font-weight: bold">would you married me</h5>
+                        <h6 style="color: #aaa">Nihal & ala</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a class="col" href="/videos/video.html" style="text-decoration:none;">
+                <div style="cursor: pointer;" class="card bg-dark">
+                  <video
+                    src="/uploads/videos/video-1700504818993-735704798"
+                    class="card-img-top rounded"
+                    alt="..."
+                    style="width: 398px;height: 223px;"
+                  ></video>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                      <img
+                        src="/images/nihal.jpg"
+                        class="rounded-circle"
+                        width="50"
+                        height="50"
+                        alt=""
+                      />
+                      <div>
+                        <h5 style="color: #aaa; font-weight: bold">would you married me</h5>
+                        <h6 style="color: #aaa">Nihal & ala</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <a class="col" href="/videos/video.html" style="text-decoration:none;">
+                <div style="cursor: pointer;" class="card bg-dark">
+                  <video
+                    src="/uploads/videos/video-1700504818993-735704798"
+                    class="card-img-top rounded"
+                    alt="..."
+                    style="width: 398px;height: 223px;"
+                  ></video>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                      <img
+                        src="/images/nihal.jpg"
+                        class="rounded-circle"
+                        width="50"
+                        height="50"
+                        alt=""
+                      />
+                      <div>
+                        <h5 style="color: #aaa; font-weight: bold">would you married me</h5>
+                        <h6 style="color: #aaa">Nihal & ala</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+        </div>
+    </div>
+    <script src="/js/index.js"></script>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
