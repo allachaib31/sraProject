@@ -8,7 +8,8 @@ const authentication = require('./routers/authentication.routers');
 const uploadVideo = require('./routers/uploadVideo.routers');
 const showVideos = require('./routers/showviedos.routers');
 const showChannelVideos = require('./routers/showChannelVideos.routers');
-const abonne = require('./routers/abonne.routers')
+const abonne = require('./routers/abonne.routers');
+const consultOtherChannels = require('./routers/consultOtherChannels.routers');
 const morgan = require('morgan');
 const random = require('./routers/showvidbuid&random.routers')
 const MONGODBURL = process.env.MONGODBURL;
@@ -33,6 +34,7 @@ app.use(express.static('views'))
     .use('/search/',search)
     .use('/abonne/',abonne)
     .use('/random/',random)
+    .use('/consultOtherChannels/',consultOtherChannels);
 app.get('/',(req,res)=>{
     return res.status(200).sendFile(__dirname + '/index.html')
 })
