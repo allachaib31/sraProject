@@ -1,8 +1,14 @@
-/*if(window.localStorage.getItem("token")){
-    window.location.href = "/index.html";
+if(window.location.pathname == "/authentification/signup.html" || window.location.pathname == "/authentification/signin.html"){
+    if(window.localStorage.getItem("token")){
+        window.location.href = "/index.html";
+    }
 }
-*/
-//alert(window.location.pathname == "/index.html")
+if(window.location.pathname == "/" || window.location.pathname == "/index.html"){
+    if(!window.localStorage.getItem("token")){
+        window.location.href = "/authentification/signin.html";
+    }
+}
+
 class Authentication {
     #username;
     #email;
@@ -158,11 +164,37 @@ try{
 }
 
 if(window.location.pathname == "/channel/channel.html"){
+    const sendSubscribe = document.getElementById("sendSubscribe");
+    sendSubscribe.addEventListener("click",()=>{
+        //alert(sendSubscribe.getAttribute('data-Id'))
+        if(sendSubscribe.getAttribute('data-status') == "Subscribe"){
+            axios.post("/abonne/",{
+                token: window.localStorage.getItem("token"),
+                idChannel: sendSubscribe.getAttribute('data-Id')
+            }).then((res)=>{
+                if(res.data.msg == true){
+                    sendSubscribe.innerText = "Unsubscribe";
+                }
+                console.log(res)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }else{
+            alert("un")
+        }
+    })
     axios.post('/channel/getchannel',{
         token: window.localStorage.getItem("token")
     }).then((res)=>{
         console.log(res)
         if(res.data.msg == "channel is found"){
+            sendSubscribe.setAttribute("data-Id",res.data.channel._id);
+
+            if(res.data.channel.idUser.subscribes.indexOf(res.data.channel._id > -1)){
+                sendSubscribe.innerText = "Unsubscribe";
+                sendSubscribe.setAttribute("data-status","Unsubscribe")
+            }
+
             const createChannelBtn = document.getElementById("createChannel");
             const imgCover = document.getElementById("imgCover");
             const channelInfo = document.getElementById("channelInfo");
@@ -177,13 +209,15 @@ if(window.location.pathname == "/channel/channel.html"){
             const videoNumber = document.getElementById("videoNumber");
             const description = document.getElementById("description");
             const videos = document.getElementById("videos");
+            const subscribeNumber = document.getElementById("subscribeNumber");
             //document.getElementById("getVideo").src = '/' + res.data.videos[0].video
-            changeImageCover.src = '/' + res.data.channel.photoDeCouvertute;
-            changeImageProfile.src = '/' + res.data.channel.profile;
+            changeImageCover.src = res.data.channel.photoDeCouvertute.slice(6);
+            changeImageProfile.src = res.data.channel.profile.slice(6);
             userChannel.innerText = res.data.channel.Name;
             videoNumber.innerText = res.data.videos.length
             nameChannel.innerText = res.data.channel.Name;
             description.innerText = res.data.channel.Descreption;
+            subscribeNumber.innerHTML = res.data.videos.length + " subscribers"
             for(let i = 0;i < res.data.videos.length;i++){
                 videos.innerHTML += `
                 <a class="col" href="/videos/video.html?vidId=${res.data.videos[i]._id}" style="text-decoration:none;">
@@ -197,7 +231,7 @@ if(window.location.pathname == "/channel/channel.html"){
                   <div class="card-body">
                     <div class="d-flex align-items-center gap-3">
                       <img
-                        src="/${res.data.channel.profile}"
+                        src="${changeImageProfile.src}"
                         class="rounded-circle"
                         width="50"
                         height="50"
@@ -214,7 +248,6 @@ if(window.location.pathname == "/channel/channel.html"){
                 `
             }
         }else{
-            alert(false)
         }
     }).catch((err)=>{
         console.log(err)
@@ -241,4 +274,104 @@ try {
     })
 } catch (error) {
     
+}
+
+if(window.location.pathname == "/videos/video.html"){
+    const urlParams = new URLSearchParams(window.location.search);
+    const vidid = urlParams.get('vidId');
+    axios.post("/random/",{
+        token: window.localStorage.getItem("token"),
+        vidid : vidid
+    }).then((res)=>{
+        console.log(res);
+        const displayVideo = document.getElementById("displayVideo");
+        const titleVideo = document.getElementById("titleVideo");
+        const subscribers = document.getElementById("subscribers");
+        const imageProfile = document.getElementById("imageProfile");
+        const titleChannel = document.getElementById("titleChannel");
+        const DescriptionVideo = document.getElementById("DescriptionVideo");
+        const commentaireImage = document.getElementById("commentaireImage");
+        const videos = document.getElementById("videos");
+        displayVideo.src = "/" + res.data.video.video;
+        imageProfile.src =  res.data.video.idChanel.profile.slice(6)
+        commentaireImage.src = res.data.video.idChanel.profile.slice(6);
+        titleVideo.innerText = res.data.video.title;
+        titleChannel.innerHTML = res.data.video.idChanel.Name;
+        DescriptionVideo.innerHTML = res.data.video.Descreption
+        subscribers.innerHTML = res.data.video.idChanel.idUser.subscribes.length + " subscribers";
+        const originalDate = new Date("2023-11-28T13:29:01.040Z");
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = originalDate.toLocaleDateString('en-US', options);
+        const viewsDate = document.getElementById("viewsDate");
+        viewsDate.innerHTML = res.data.video.vues + " views " + formattedDate;
+        for(let i = 0;i < res.data.random.length;i++){
+            videos.innerHTML += `
+            <a class="col" href="/videos/video.html?vidId=${res.data.random[i]._id}" style="text-decoration:none;">
+            <div style="cursor: pointer;" class="card bg-dark">
+              <video
+                src="/${res.data.random[i].video}"
+                class="card-img-top"
+                alt="..."
+                style="width: 398px;height: 223px;"
+              ></video>
+              <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                  <img
+                    src="${res.data.video.idChanel.profile.slice(6)}"
+                    class="rounded-circle"
+                    width="50"
+                    height="50"
+                    alt=""
+                  />
+                  <div>
+                    <h5 style="color: #aaa; font-weight: bold">${res.data.random[i].title}</h5>
+                    <h6 style="color: #aaa">${res.data.random[i].idChanel.Name}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+            `
+        }
+    }).catch(()=>{
+        window.location.href = "/"
+    })
+}
+
+if(window.location.pathname == "/" || window.location.pathname == "/index.html"){
+    axios.get("/showVideos/").then((res)=>{
+        const videos = document.getElementById("videos");
+        console.log(res)
+        for(let i = 0;i < res.data.length;i++){
+            videos.innerHTML += `
+            <a class="col" href="/videos/video.html?vidId=${res.data[i]._id}" style="text-decoration:none;">
+            <div style="cursor: pointer;" class="card bg-dark">
+              <video
+                src="/${res.data[i].video}"
+                class="card-img-top"
+                alt="..."
+                style="width: 398px;height: 223px;"
+              ></video>
+              <div class="card-body">
+                <div class="d-flex align-items-center gap-3">
+                  <img
+                    src="${res.data[i].idChanel.profile.slice(6)}"
+                    class="rounded-circle"
+                    width="50"
+                    height="50"
+                    alt=""
+                  />
+                  <div>
+                    <h5 style="color: #aaa; font-weight: bold">${res.data[i].title}</h5>
+                    <h6 style="color: #aaa">${res.data[i].idChanel.Name}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+            `
+        }
+    }).catch((err)=>{
+        console.log(err)
+    })
 }

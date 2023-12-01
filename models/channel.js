@@ -21,5 +21,5 @@ const channelSchema = new mongoose.Schema({
         ref : "users"
     }
 })
-const channleModel = mongoose.model('channel',channelSchema);
+const channleModel = mongoose.model('channels',channelSchema);
 module.exports = channleModel;

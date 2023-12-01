@@ -27,7 +27,7 @@ exports.getchanneluser =async(req,res)=>{
       console.log(req.body.idUser)
       const channel = await channleModel.findOne({
         idUser : req.body.idUser,
-      })
+      }).populate("idUser");
       if(!channel){
         return res.status(200).send({
           msg :'channel not found'

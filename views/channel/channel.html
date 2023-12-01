@@ -21,7 +21,7 @@
         <div class="d-flex justify-content-center align-items-center gap-3">
           <img src="/images/youtube.png" width="100" height="100" alt="" />
           <h1 class="text-white">
-            <span style="color: #f00">Nihal</span>
+            <span style="color: #f00">You</span>
             <span style="color: white">Tube</span>
           </h1>
         </div>
@@ -88,19 +88,15 @@
       <div class="d-flex align-items-center gap-2">
         <img id="changeImageProfile" src="/images/nihal.jpg" alt="" />
         <div>
-          <h1 id="nameChannel" class="text-white">Nihal & Alaa</h1>
+          <h1 id="nameChannel" class="text-white"></h1>
           <ul class="list-style-none d-flex gap-4" style="color: #aaa">
-            <li id="userChannel">@ala&nihal</li>
-            <li><span id="subscribeNumber">16k</span> subscribers</li>
+            <li id="userChannel"></li>
+            <li><span id="subscribeNumber"></li>
             <li><span id="videoNumber"></span> video</li>
           </ul>
           <p id="description" style="color: #aaa">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-            eos quaerat qui nam illo quos cumque? Sapiente labore quae
-            doloremque cupiditate modi inventore quos libero, corrupti mollitia
-            facilis laboriosam earum.
           </p>
-          <button class="btn btn-light">Subscribe</button>
+          <button id="sendSubscribe" data-status="Subscribe" data-Id="" class="btn btn-light">Subscribe</button>
         </div>
       </div>
     </div>
@@ -112,7 +108,7 @@
       <button
         class="btn"
         data-bs-toggle="modal"
-        data-bs-target="#createChannel"
+        data-bs-target="#ModalChannel"
         style="color: #f00; border: 1px solid #f00"
       >
         Create Channel
@@ -121,9 +117,9 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="createChannel"
+      id="ModalChannel"
       tabindex="-1"
-      aria-labelledby="createChannel"
+      aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog">

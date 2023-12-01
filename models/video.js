@@ -20,6 +20,10 @@ const videoSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref :"channels"
     },
+    vues: {
+        type: Number,
+        default: 0
+    },
     date : {
         type : Date,
     }

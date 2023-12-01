@@ -6,9 +6,9 @@ const creatchannel = require('../controllers/creatChannel.controllers')
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
       if (file.fieldname === 'imageProfile') {
-          cb(null, './uploads/profileImages');
+          cb(null, './public/uploads/profileImages');
         } else if (file.fieldname === 'imageCover') {
-          cb(null, './uploads/coverImages');
+          cb(null, './public/uploads/coverImages');
         }
   },
   filename: function (req, file, cb) {
