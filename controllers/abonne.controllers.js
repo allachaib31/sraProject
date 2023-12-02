@@ -23,16 +23,11 @@ exports.desabonne = async (req, res) => {
     try{
         const user = await userModel.findById(req.body.idUser)
         const channel = user.subscribes.indexOf(req.body.idChannel);
-        for(let i=0;i<user.subscribes.length;i++){
-            if(user.subscribes[i]!=req.body.idChannel){
-                return res.status(200).send({
-                    msg : "not subscribe"
-                })
-            }
+        if(channel>-1){
+            user.subscribes.splice(channel, 1);
+            await user.save();
         }
-        user.subscribes.splice(channel, 1);
-        await user.save();
-
+        console.log(channel);
         return res.status(200).send({
             msg: 'unsubscribe'
         });

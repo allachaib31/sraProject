@@ -4,5 +4,5 @@ const router = express.Router();
 const abonne = require('../controllers/abonne.controllers')
 
 router.post('/',middleware.authenticationMiddleware,abonne.abonne);
-router.post('/desabonne',middleware.authenticationMiddleware,abonne.abonne);
+router.post('/desabonne',middleware.authenticationMiddleware,abonne.desabonne);
 module.exports = router;
