@@ -148,7 +148,7 @@ try{
         form.append("imageCover",imageCover.files[0]);
         axios.post("/channel/creatchannel",form).then((res)=>{
             console.log(res.data)
-            if(res.data == "channel created seccessfully"){
+            if(res.data == "Channel created successfully"){
                 alert("your channel is created");
                 window.location.reload();
             }else{
@@ -174,23 +174,34 @@ if(window.location.pathname == "/channel/channel.html"){
             }).then((res)=>{
                 if(res.data.msg == true){
                     sendSubscribe.innerText = "Unsubscribe";
+                    sendSubscribe.setAttribute('data-status','UnSubscribe')
                 }
                 console.log(res)
             }).catch((err)=>{
                 console.log(err)
             })
         }else{
-            alert("un")
+            axios.post("/abonne/desabonne",{
+                token: window.localStorage.getItem("token"),
+                idChannel: sendSubscribe.getAttribute('data-Id')
+            }).then((res)=>{
+                if(res.data.msg == 'Unsubscribed'){
+                    sendSubscribe.innerText = "subscribe";
+                    sendSubscribe.setAttribute('data-status','Subscribe')
+                }
+                console.log(res)
+            }).catch((err)=>{
+
+            });
         }
     })
     axios.post('/channel/getchannel',{
         token: window.localStorage.getItem("token")
     }).then((res)=>{
         console.log(res)
-        if(res.data.msg == "channel is found"){
+        if(res.data.msg == "Channel is found"){
             sendSubscribe.setAttribute("data-Id",res.data.channel._id);
-
-            if(res.data.channel.idUser.subscribes.indexOf(res.data.channel._id > -1)){
+            if(res.data.channel.idUser.subscribes.indexOf(res.data.channel._id) > -1){
                 sendSubscribe.innerText = "Unsubscribe";
                 sendSubscribe.setAttribute("data-status","Unsubscribe")
             }
@@ -211,13 +222,13 @@ if(window.location.pathname == "/channel/channel.html"){
             const videos = document.getElementById("videos");
             const subscribeNumber = document.getElementById("subscribeNumber");
             //document.getElementById("getVideo").src = '/' + res.data.videos[0].video
-            changeImageCover.src = res.data.channel.photoDeCouvertute.slice(6);
+            changeImageCover.src = res.data.channel.photoDeCouverture.slice(6);
             changeImageProfile.src = res.data.channel.profile.slice(6);
             userChannel.innerText = res.data.channel.Name;
             videoNumber.innerText = res.data.videos.length
             nameChannel.innerText = res.data.channel.Name;
-            description.innerText = res.data.channel.Descreption;
-            subscribeNumber.innerHTML = res.data.videos.length + " subscribers"
+            description.innerText = res.data.channel.Description;
+            subscribeNumber.innerHTML = res.data.channel.idUser.subscribes.length + " subscribers"
             for(let i = 0;i < res.data.videos.length;i++){
                 videos.innerHTML += `
                 <a class="col" href="/videos/video.html?vidId=${res.data.videos[i]._id}" style="text-decoration:none;">
@@ -270,20 +281,57 @@ try {
         form.append("token",window.localStorage.getItem("token"));
         form.append("video",video.files[0])
 
-        axios.post("/upload/uploadVideo/",form)
+        axios.post("/upload/uploadVideo/",form).then((res)=>{
+            console.log(res)
+            if(res.data == 'Video saved'){
+                alert("video saved");
+                window.location.reload();
+            }
+        })
     })
 } catch (error) {
     
 }
 
 if(window.location.pathname == "/videos/video.html"){
+    const sendSubscribe = document.getElementById("sendSubscribe");
+    sendSubscribe.addEventListener("click",()=>{
+        //alert(sendSubscribe.getAttribute('data-Id'))
+        if(sendSubscribe.getAttribute('data-status') == "Subscribe"){
+            axios.post("/abonne/",{
+                token: window.localStorage.getItem("token"),
+                idChannel: sendSubscribe.getAttribute('data-Id')
+            }).then((res)=>{
+                if(res.data.msg == true){
+                    sendSubscribe.innerText = "Unsubscribe";
+                    sendSubscribe.setAttribute('data-status','UnSubscribe')
+                }
+                console.log(res)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }else{
+            axios.post("/abonne/desabonne",{
+                token: window.localStorage.getItem("token"),
+                idChannel: sendSubscribe.getAttribute('data-Id')
+            }).then((res)=>{
+                if(res.data.msg == 'Unsubscribed'){
+                    sendSubscribe.innerText = "subscribe";
+                    sendSubscribe.setAttribute('data-status','Subscribe')
+                }
+                console.log(res)
+            }).catch((err)=>{
+
+            });
+        }
+    })
     const urlParams = new URLSearchParams(window.location.search);
     const vidid = urlParams.get('vidId');
     axios.post("/random/",{
         token: window.localStorage.getItem("token"),
         vidid : vidid
     }).then((res)=>{
-        console.log(res);
+       console.log(res);
         const displayVideo = document.getElementById("displayVideo");
         const titleVideo = document.getElementById("titleVideo");
         const subscribers = document.getElementById("subscribers");
@@ -304,10 +352,11 @@ if(window.location.pathname == "/videos/video.html"){
         const formattedDate = originalDate.toLocaleDateString('en-US', options);
         const viewsDate = document.getElementById("viewsDate");
         viewsDate.innerHTML = res.data.video.vues + " views " + formattedDate;
+        sendSubscribe.setAttribute('data-Id',res.data.video.idChanel._id)
         for(let i = 0;i < res.data.random.length;i++){
             videos.innerHTML += `
             <a class="col" href="/videos/video.html?vidId=${res.data.random[i]._id}" style="text-decoration:none;">
-            <div style="cursor: pointer;" class="card bg-dark">
+            <div style="cursor: pointer;width:400px;" class="card bg-dark">
               <video
                 src="/${res.data.random[i].video}"
                 class="card-img-top"
@@ -317,7 +366,7 @@ if(window.location.pathname == "/videos/video.html"){
               <div class="card-body">
                 <div class="d-flex align-items-center gap-3">
                   <img
-                    src="${res.data.video.idChanel.profile.slice(6)}"
+                    src="${res.data.random[i].idChanel.profile.slice(6)}"
                     class="rounded-circle"
                     width="50"
                     height="50"
@@ -333,6 +382,7 @@ if(window.location.pathname == "/videos/video.html"){
           </a>
             `
         }
+        
     }).catch(()=>{
         window.location.href = "/"
     })
@@ -345,7 +395,7 @@ if(window.location.pathname == "/" || window.location.pathname == "/index.html")
         for(let i = 0;i < res.data.length;i++){
             videos.innerHTML += `
             <a class="col" href="/videos/video.html?vidId=${res.data[i]._id}" style="text-decoration:none;">
-            <div style="cursor: pointer;" class="card bg-dark">
+            <div style="cursor: pointer;width:400px;" class="card bg-dark">
               <video
                 src="/${res.data[i].video}"
                 class="card-img-top"

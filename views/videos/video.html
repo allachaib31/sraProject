@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <title>Document</title>
+    <title>YouTube</title>
   </head>
   <body class="bg-dark">
     <header class="container">
@@ -32,14 +32,14 @@
         </div>
         <div class="text-white profile">
           <img
-            src="/images/nihal.jpg"
+            src="/images/profile.png"
             width="75"
             height="75"
             alt=""
             id="profile"
             class="rounded-circle"
           />
-          <div class="bg-white text-dark" id="dropDown">
+          <div class="bg-white text-dark" id="dropDown" style="z-index: 999;">
             <ul class="list-group">
               <li
                 class="list-group-item list-group-item-action"
@@ -80,7 +80,7 @@
           placeholder="Search"
           aria-label="Search"
         />
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success" type="button">Search</button>
       </form>
     </div>
     <!-- Modal -->
@@ -151,7 +151,7 @@
                         <span id="subscribers" style="color: #aaa;"></span>
                     </div>
                     <div>
-                        <button class="btn btn-light" style="font-weight: bold;">Subscribe</button>
+                        <button class="btn btn-light" style="font-weight: bold;" id="sendSubscribe" data-status="Subscribe" data-Id="">Subscribe</button>
                     </div>
                   </div>
                   <div style="background-color: #272727;width: 90%;" class="rounded p-3 mt-3 text-white">

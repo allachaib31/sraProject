@@ -1,8 +1,16 @@
+// Importation du module Express
 const express = require('express');
-const router = express.Router();
+
+// Importation du module multer pour la gestion des fichiers uploadés
 const multer = require('multer');
-const middleware =require('../middleware/authentication.middleware'); 
-const creatchannel = require('../controllers/creatChannel.controllers')
+
+// Importation du middleware d'authentification depuis le dossier middleware
+const middleware = require('../middleware/authentication.middleware');
+
+// Importation du contrôleur creatchannel depuis le dossier controllers
+const creatchannel = require('../controllers/creatChannel.controllers');
+
+// Configuration du stockage des fichiers uploadés avec multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
       if (file.fieldname === 'imageProfile') {
@@ -15,13 +23,25 @@ const storage = multer.diskStorage({
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     cb(null, file.fieldname + '-' + uniqueSuffix)
   }
-})
-const upload = multer({ storage: storage })
-router.post('/creatchannel',upload.fields([
+});
+
+// Configuration du middleware multer avec les options de stockage
+const upload = multer({ storage: storage });
+
+// Création d'un routeur Express
+const router = express.Router();
+
+// Définition des routes
+
+// Route pour la création de chaîne (POST /nom-de-la-route/creatchannel)
+router.post('/creatchannel', upload.fields([
   { name: 'imageProfile', maxCount: 1 },
   { name: 'imageCover', maxCount: 1 }
-]),middleware.authenticationMiddleware,creatchannel.creatchannel
-)
-router.post('/getchannel',middleware.authenticationMiddleware,creatchannel.getchanneluser)
+]), middleware.authenticationMiddleware, creatchannel.creatchannel);
 
+// Route pour récupérer les informations de la chaîne de l'utilisateur (POST /nom-de-la-route/getchannel)
+router.post('/getchannel', middleware.authenticationMiddleware, creatchannel.getchanneluser);
+
+// Exportation du routeur pour l'utiliser dans d'autres parties de l'application
 module.exports = router;
+

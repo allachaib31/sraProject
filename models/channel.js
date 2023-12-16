@@ -1,25 +1,36 @@
+// Importation du module mongoose pour interagir avec MongoDB
 const mongoose = require('mongoose');
 
+// Définition du schéma pour les chaînes
 const channelSchema = new mongoose.Schema({
-    Name : {
-        type : String,
-        maxLength : 255,
-        required : true,
+    // Nom de la chaîne
+    Name: {
+        type: String,
+        maxLength: 255,
+        required: true,
     },
-    photoDeCouvertute : {
-        type : String,
+    // Chemin vers la photo de couverture de la chaîne
+    photoDeCouverture: {
+        type: String,
     },
-    profile : {
-        type : String,
+    // Chemin vers la photo de profil de la chaîne
+    profile: {
+        type: String,
     },
-    Descreption : {
-        type : String,
-        maxLength : 255,
+    // Description de la chaîne
+    Description: {
+        type: String,
+        maxLength: 255,
     },
-    idUser : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "users"
+    // ID de l'utilisateur associé à la chaîne
+    idUser: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users" // Référence au modèle "users"
     }
-})
-const channleModel = mongoose.model('channels',channelSchema);
-module.exports = channleModel;
+});
+
+// Création du modèle de données pour les chaînes
+const channelModel = mongoose.model('channels', channelSchema);
+
+// Exportation du modèle pour être utilisé dans d'autres parties de l'application
+module.exports = channelModel;
