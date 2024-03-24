@@ -17,6 +17,7 @@ const showChannelVideos = require('./routers/showChannelVideos.routers');
 const abonne = require('./routers/abonne.routers');
 const consultOtherChannels = require('./routers/consultOtherChannels.routers');
 const random = require('./routers/showvidbuid&random.routers');
+const comment = require('./routers/comment.routers');
 
 // Configuration de l'URL de la base de données MongoDB à partir des variables d'environnement
 const MONGODBURL = process.env.MONGODBURL;
@@ -47,7 +48,8 @@ app.use(express.static('views'))
     .use('/search/', search)
     .use('/abonne/', abonne)
     .use('/random/', random)
-    .use('/consultOtherChannels/', consultOtherChannels);
+    .use('/consultOtherChannels/', consultOtherChannels)
+    .use('/comment/',comment);
 
 // Route pour la page d'accueil
 app.get('/', (req, res) => {

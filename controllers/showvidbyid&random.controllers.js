@@ -15,8 +15,12 @@ exports.random = async (req, res) => {
                 model: 'users',
                 select: 'subscribes'
             }
+        }).populate({
+            path: 'comment.$*.oauth',
+            model: 'users',
+            select: 'username', // Adjust this according to your user schema
         });
-
+        console.log(video)
         // Vérification de l'existence de la vidéo
         if (!video) {
             return res.status(400).send({

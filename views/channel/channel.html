@@ -18,13 +18,13 @@
   <body class="bg-dark">
     <header class="container">
       <div class="d-flex justify-content-between align-items-center">
-        <div class="d-flex justify-content-center align-items-center gap-3">
+        <a href="/" style="text-decoration: none;cursor: pointer;z-index: 999;"  class="d-flex justify-content-center align-items-center gap-3">
           <img src="/images/youtube.png" width="100" height="100" alt="" />
           <h1 class="text-white">
             <span style="color: #f00">You</span>
             <span style="color: white">Tube</span>
           </h1>
-        </div>
+        </a>
         <div class="text-white profile">
           <img
             src="/images/profile.png"
@@ -34,7 +34,7 @@
             id="profile"
             class="rounded-circle"
           />
-          <div class="bg-white text-dark" id="dropDown">
+          <div class="bg-white text-dark" id="dropDown" style="z-index: 999;">
             <ul class="list-group">
               <li
                 class="list-group-item list-group-item-action"
@@ -68,17 +68,6 @@
         </div>
       </div>
     </header>
-    <div class="container">
-      <form class="d-flex">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
     <div style="background-color: black">
       <div id="imgCover" class="container imageCouver d-none">
         <img id="changeImageCover" src="/images/couver.jpg" alt="" />

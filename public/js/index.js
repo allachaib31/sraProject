@@ -130,7 +130,50 @@ try{
 
 }
 
+const sendSearch = document.getElementById("sendSearch");
+try {
+    sendSearch.addEventListener("click",()=>{
+        const search = document.getElementById("Search").value;
+        axios.get("/search/?search="+search)
+        .then((res)=>{
+            console.log(res)
+            const videos = document.getElementById("videos");
+            videos.innerHTML = "";
+            for(let i = 0;i < res.data.length;i++){
+                videos.innerHTML = `
+                <a class="col" href="/videos/video.html?vidId=${res.data[i]._id}" style="text-decoration:none;">
+                <div style="cursor: pointer;" class="card bg-dark">
+                  <video
+                    src="/${res.data[i].video}"
+                    class="card-img-top"
+                    alt="..."
+                    style="width: 398px;height: 223px;"
+                  ></video>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                      <img
+                        src="${res.data[i].idChanel.profile.slice(6)}"
+                        class="rounded-circle"
+                        width="50"
+                        height="50"
+                        alt=""
+                      />
+                      <div>
+                        <h5 style="color: #aaa; font-weight: bold">${res.data[i].title}</h5>
+                        <h6 style="color: #aaa">${res.data[i].idChanel.Name}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>`
+            }
+        }).catch((err)=>{
 
+        })
+    })
+} catch (error) {
+    
+}
 const submitChannel = document.getElementById("submitChannel");
 
 try{
@@ -382,9 +425,42 @@ if(window.location.pathname == "/videos/video.html"){
           </a>
             `
         }
+        const displayComment = document.getElementById("displayComment");
+        for(let x in res.data.video.comment){
+            displayComment.innerHTML += `
+            <div class="text-white">
+            <h4>${res.data.video.comment[x].oauth.username}</h4>
+            <p>${res.data.video.comment[x].text}</p>
+            </div>
+            `
+            console.log(res.data.video.comment[x]);
+        }
         
     }).catch(()=>{
         window.location.href = "/"
+    })
+    const sendComment = document.getElementById("sendComment");
+    sendComment.addEventListener("click",()=>{
+        const comment = document.getElementById("comment");
+        axios.post("/comment/",{
+            token: window.localStorage.getItem("token"),
+            comment: comment.value,
+            vidid : vidid
+        }).then((result)=>{
+            console.log(result)
+            if(!result.data.status){
+                return alert("try again");
+            }
+            const displayComment = document.getElementById("displayComment");
+            displayComment.innerHTML += `
+            <div class="text-white">
+            <h4>${document.getElementById("titleChannel").innerText}</h4>
+            <p>${comment.value}</p>
+            </div>
+            `
+        }).catch(()=>{
+            alert("try again")
+        })
     })
 }
 

@@ -34,6 +34,16 @@ const videoSchema = new mongoose.Schema({
     // Date de création de la vidéo
     date: {
         type: Date,
+    },
+    comment:{
+        type: Map,
+        of: new mongoose.Schema({
+            text: String,
+            oauth: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'users'
+            }
+        })
     }
 });
 
